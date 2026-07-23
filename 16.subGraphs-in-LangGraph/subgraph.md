@@ -84,11 +84,11 @@ The subgraph reads from and writes to the parent's channels automatically — no
 
 When a subgraph is compiled, the `checkpointer` argument controls how much it remembers between invocations. Think of a support bot with a "billing" subagent — should it forget the customer between questions, or build context over the conversation? There are three modes:
 
-| Mode                     | `checkpointer=` | What it means                                                                                                                     |
-| ------------------------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Per-invocation (default) | `None`          | Starts fresh every call, but still inherits the parent's checkpointer so interrupts/durable execution work *within* a single call |
-| Per-thread               | `True`          | State builds up across repeated calls on the same thread — like a subagent with ongoing memory                                    |
-| Stateless                | `False`         | No checkpointing at all — behaves like a plain function call, no pause/resume, no crash recovery                                  |
+| Mode | `checkpointer=` | What it means |
+|---|---|---|
+| Per-invocation (default) | `None` | Starts fresh every call, but still inherits the parent's checkpointer so interrupts/durable execution work *within* a single call |
+| Per-thread | `True` | State builds up across repeated calls on the same thread — like a subagent with ongoing memory |
+| Stateless | `False` | No checkpointing at all — behaves like a plain function call, no pause/resume, no crash recovery |
 
 **Per-invocation** is the right default for most multi-agent setups — e.g., a fruit-expert subagent that just answers one question at a time doesn't need to recall earlier questions.
 
